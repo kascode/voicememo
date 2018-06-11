@@ -6,8 +6,7 @@ const Memo = ({ data }) => {
     <div className="Memo">
       <div className="Memo__title">{data.date}</div>
       <div className="Memo__content">
-        <audio src={data.audio && window.URL.createObjectURL(data.audio)} controls></audio>
-        Test text in place of real message
+        {data.audio ? <audio src={data.audio && window.URL.createObjectURL(data.audio)} controls></audio> : null}
       </div>
     </div>
   );
