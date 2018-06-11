@@ -6,7 +6,7 @@ const MemoList = ({ memos }) => {
   return (
     <div className="MemoList">
       {memos.map(memo => {
-        return <Memo data={memo} />;
+        return <Memo data={memo} key={memo.date} />;
       })}
     </div>
   );
