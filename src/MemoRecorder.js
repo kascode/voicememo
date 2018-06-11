@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import './MemoRecorder.css';
 
 class MemoRecorder extends Component {
   static propTypes = {
@@ -59,7 +60,7 @@ class MemoRecorder extends Component {
 
   render () {
     return (
-      <div className="Recorder">
+      <div className="MemoRecorder">
           <button onClick={this.state.recording ? this.onRecordStop : this.onRecordStart}>
             {this.state.recording ? "Stop" : "Record"}
           </button>

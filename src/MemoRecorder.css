@@ -1,0 +1,14 @@
+.MemoRecorder {
+    text-align: center;
+}
+
+.MemoRecorder button {
+    padding: 0 20px;
+    height: 40px;
+    background-color: #1f247f;
+    color: #fff;
+    border: 0;
+    border-radius: 20px;
+    line-height: 40px;
+    font-weight: bold;
+}
