@@ -8,13 +8,7 @@ class App extends Component {
     super(props);
 
     this.state = {
-      memos: [
-        {
-          date: new Date().getTime(),
-          audio: null,
-          text: ""
-        }
-      ]
+      memos: []
     };
   }
 
