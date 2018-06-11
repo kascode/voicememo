@@ -1,0 +1,12 @@
+.Memo {
+    margin-bottom: 10px;
+    padding: 15px 20px;
+    background-color: #eeeff4;
+    border-radius: 25px;
+}
+.Memo__title {
+    margin-bottom: 5px;
+    line-height: 1.5;
+    color: rgba(0,0,0,.25);
+    font-style: italic;
+}
