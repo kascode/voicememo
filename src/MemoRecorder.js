@@ -34,8 +34,8 @@ class MemoRecorder extends Component {
   }
 
   componentWillUnmount () {
-    this.props.mediaRecorder.ondataavailable = () => {};
-    this.props.mediaRecorder.onstop = () => {};
+    this.props.mediaRecorder.ondataavailable = null;
+    this.props.mediaRecorder.onstop = null;
   }
 
   onRecordStart = () => {
