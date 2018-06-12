@@ -42,6 +42,11 @@ class Memo extends Component {
       });
 
       this.audioEl.src = window.URL.createObjectURL(this.props.data.audio);
+      this.audioEl.addEventListener('pause', () => {
+        this.setState({
+          playing: false
+        })
+      });
     }
   }
 

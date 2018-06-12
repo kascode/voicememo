@@ -21,6 +21,7 @@
 .Memo__button {
     width: 40px;
     height: 40px;
+    cursor: pointer;
 }
 
 .Memo__delete {
