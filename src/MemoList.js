@@ -5,9 +5,9 @@ import "./MemoList.css";
 const MemoList = ({ memos }) => {
   return (
     <div className="MemoList">
-      {memos.map(memo => {
+      {memos.length ? memos.map(memo => {
         return <Memo data={memo} key={memo.date} />;
-      })}
+      }) : <div className="MemoList__empty">You don't have any memos. Record one.</div>}
     </div>
   );
 };
