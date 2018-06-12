@@ -86,9 +86,7 @@ class Memo extends Component {
       <div className="Memo">
         <div className="Memo__title">{this.props.data.date}</div>
           {this.props.data.audio ? this.renderContent() : null}
-        <div className="Memo__delete" onClick={this.deleteMemo}>
-          <span></span>
-        </div>
+        <div className="Memo__delete" onClick={this.deleteMemo}/>
       </div>
     );
   }
