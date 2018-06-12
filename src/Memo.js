@@ -1,7 +1,13 @@
 import React, { Component } from "react";
+import PropTypes from 'prop-types';
 import "./Memo.css";
 
 class Memo extends Component {
+  static propTypes = {
+    data: PropTypes.object.isRequired,
+    deleteMemo: PropTypes.func
+  };
+
   constructor(props) {
     super(props);
 
@@ -36,6 +42,12 @@ class Memo extends Component {
     }
   }
 
+  deleteMemo = () => {
+    if (this.props.deleteMemo) {
+      this.props.deleteMemo(this.props.data.date);
+    }
+  };
+
   render() {
     return (
       <div className="Memo">
@@ -44,6 +56,9 @@ class Memo extends Component {
           {this.props.data.audio ? <span onClick={() => {
             this.audioEl.play();
           }}>play: {Math.round(this.state.duration * 10) / 10}</span> : null}
+        </div>
+        <div className="Memo__delete" onClick={this.deleteMemo}>
+          <span></span>
         </div>
       </div>
     );

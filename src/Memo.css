@@ -1,12 +1,48 @@
 .Memo {
+    position: relative;
     margin-bottom: 10px;
     padding: 15px 20px;
     background-color: #eeeff4;
     border-radius: 25px;
+    overflow: hidden;
 }
 .Memo__title {
     margin-bottom: 5px;
     line-height: 1.5;
     color: rgba(0,0,0,.25);
     font-style: italic;
+}
+
+.Memo__delete {
+    position: absolute;
+    display: inline-block;
+    top: 0;
+    right: -50px;
+    bottom: 0;
+    width: 50px;
+    background-color: #ff5038;
+    text-align: center;
+    cursor: pointer;
+    transition: right 0.2s ease-in-out;
+}
+.Memo:hover .Memo__delete, .Memo:focus .Memo__delete {
+    right: 0;
+}
+.Memo__delete:before, .Memo__delete:after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: block;
+    content: '';
+    margin-top: -2px;
+    margin-left: -10px;
+    width: 20px;
+    height: 3px;
+    background-color: white;
+}
+.Memo__delete:before {
+    transform: rotateZ(45deg);
+}
+.Memo__delete:after {
+    transform: rotateZ(-45deg);
 }

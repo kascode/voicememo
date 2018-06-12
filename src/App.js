@@ -35,6 +35,12 @@ class App extends Component {
     })
   };
 
+  deleteMemo = date => {
+    this.setState({
+      memos: this.state.memos.filter(memo => memo.date !== date)
+    });
+  };
+
   render() {
     return (
       <div className="App">
@@ -43,7 +49,10 @@ class App extends Component {
         </header>
         {this.state.mediaSupported ?
           (<div className="App__content">
-            <MemoList memos={this.state.memos}/>
+            <MemoList
+              memos={this.state.memos}
+              deleteMemo={this.deleteMemo}
+            />
             <MemoRecorder
               mediaRecorder={this.mediaRecorder}
               onRecorded={this.addMemoRecord}
