@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import "./Memo.css";
 
+const playIcon = require('./assets/play.svg');
+const stopIcon = require('./assets/stop.svg');
+
 class Memo extends Component {
   static propTypes = {
     data: PropTypes.object.isRequired,
@@ -48,15 +51,41 @@ class Memo extends Component {
     }
   };
 
+  playMemo = () => {
+    this.setState({
+      playing: true
+    }, () => {
+      this.audioEl.play();
+    })
+  };
+
+  stopMemo = () => {
+    this.setState({
+      playing: false
+    }, () => {
+      this.audioEl.pause();
+      this.audioEl.currentTime = 0;
+    })
+  };
+
+  displayDuration = duration => (duration < 10 ? Math.round(duration * 10) / 10 : Math.round(duration)) + "s";
+
+  renderContent = () => {
+    return (
+      <div className="Memo__content">
+        <span onClick={this.state.playing ? this.stopMemo : this.playMemo}>
+          <img className="Memo__button" src={this.state.playing ? stopIcon : playIcon} alt=""/>
+        </span>
+        <span className="Memo__duration">{this.displayDuration(this.state.duration)}</span>
+      </div>
+    );
+  };
+
   render() {
     return (
       <div className="Memo">
         <div className="Memo__title">{this.props.data.date}</div>
-        <div className="Memo__content">
-          {this.props.data.audio ? <span onClick={() => {
-            this.audioEl.play();
-          }}>play: {Math.round(this.state.duration * 10) / 10}</span> : null}
-        </div>
+          {this.props.data.audio ? this.renderContent() : null}
         <div className="Memo__delete" onClick={this.deleteMemo}>
           <span></span>
         </div>
