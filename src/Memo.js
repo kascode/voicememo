@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types';
+import Loader from './Loader';
 import "./Memo.css";
 
 const playIcon = require('./assets/play.svg');
@@ -16,13 +17,15 @@ class Memo extends Component {
 
     this.state = {
       duration: null,
-      playing: false
+      playing: false,
+      preparing: false,
+      canplay: ''
     };
   }
 
   componentDidMount () {
     if (this.props.data.audio) {
-      this.audioEl = document.createElement('audio');
+      this.audioEl = document.createElement('audio', {preload: 'auto', type: 'audio/ogg; codec=opus'});
       this.audioEl.addEventListener('loadedmetadata', () => {
         // chrome can show infinity as value for duration
         if (this.audioEl.duration === Infinity) {
@@ -47,6 +50,11 @@ class Memo extends Component {
           playing: false
         })
       });
+      this.audioEl.addEventListener('canplay', () => {
+        this.setState({
+          canplay: 'Can play'
+        });
+      });
     }
   }
 
@@ -58,10 +66,20 @@ class Memo extends Component {
 
   playMemo = () => {
     this.setState({
-      playing: true
-    }, () => {
-      this.audioEl.play();
-    })
+      preparing: true
+    });
+
+    this.audioEl.play()
+      .then(() => {
+        console.log("Play started", this.props.data.audio.size);
+        this.setState({
+          playing: true,
+          preparing: false
+        })
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
 
   stopMemo = () => {
@@ -77,12 +95,15 @@ class Memo extends Component {
 
   renderContent = () => {
     return (
-      <div className="Memo__content">
-        <span onClick={this.state.playing ? this.stopMemo : this.playMemo}>
-          <img className="Memo__button" src={this.state.playing ? stopIcon : playIcon} alt=""/>
-        </span>
-        <span className="Memo__duration">{this.displayDuration(this.state.duration)}</span>
-      </div>
+        <div className="Memo__content">
+          <span onClick={this.state.playing ? this.stopMemo : this.playMemo}>
+            {this.state.preparing ?
+              <Loader/> :
+              <img className="Memo__button" src={this.state.playing ? stopIcon : playIcon} alt=""/>
+            }
+          </span>
+          <span className="Memo__duration">{this.displayDuration(this.state.duration) + ' ' + this.state.canplay}</span>
+        </div>
     );
   };
 
