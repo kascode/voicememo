@@ -2,13 +2,15 @@ import React, { Component } from "react";
 import "./App.css";
 import MemoList from "./MemoList";
 import MemoRecorder from "./MemoRecorder";
+import Loader from "./Loader";
 
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      memos: []
+      memos: [],
+      mediaSupported: null
     };
   }
 
@@ -22,6 +24,11 @@ class App extends Component {
           this.setState({
             mediaSupported: true
           });
+        })
+        .catch(() => {
+          this.setState({
+            mediaSupported: false
+          })
         })
     }
   }
@@ -58,7 +65,7 @@ class App extends Component {
               onRecorded={this.addMemoRecord}
             />
           </div>) :
-          (<div className="App__error">Media input is not supported by browser</div>)
+          (this.state.mediaSupported === null ? <Loader /> : <div className="App__error">Media input is not supported by browser</div>)
         }
       </div>
     );
